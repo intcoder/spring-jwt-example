@@ -20,11 +20,11 @@ public class SpringJwtExampleApplication {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder() {
+    BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
+    /*@Bean
     CommandLineRunner run(UserService userService) {
         return args -> {
             userService.saveRole(new Role(null, "ROLE_USER"));
@@ -45,5 +45,5 @@ public class SpringJwtExampleApplication {
             userService.addRoleToUser("arnold", "ROLE_ADMIN");
             userService.addRoleToUser("arnold", "ROLE_USER");
         };
-    }
+    }*/
 }

@@ -5,6 +5,7 @@ import net.intcoder.springjwtexample.domain.Role;
 import net.intcoder.springjwtexample.domain.User;
 import net.intcoder.springjwtexample.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -17,6 +18,7 @@ public class UserResource {
     private final UserService userService;
 
     @GetMapping("/users")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
@@ -38,4 +40,10 @@ public class UserResource {
     }
 
     record RoleToUserForm(String username, String roleName){};
+
+    @GetMapping("/test")
+    @PreAuthorize("permitAll()")
+    public String test() {
+        throw new RuntimeException();
+    }
 }
